@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOM - Medical Setup</title>
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2f3542;
+            --bg: #f1f2f6;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 { color: var(--primary); text-align: center; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.5rem; font-weight: bold; color: var(--secondary); }
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .checkbox-group { display: flex; flex-wrap: wrap; gap: 10px; }
+        .checkbox-item { background: #eee; padding: 5px 10px; border-radius: 20px; font-size: 0.9rem; display: flex; align-items: center; gap: 5px; cursor: pointer; }
+        button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s;
+        }
+        button:hover { background-color: #ff6b81; }
+        .status { text-align: center; margin-top: 1rem; color: #2ed573; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MOM Setup 🍕</h1>
+        <p style="text-align: center; color: #777;">Tell MOM about your health so she can order the right food for you.</p>
+        
+        <form action="/setup" method="POST">
+            <div class="form-group">
+                <label>Medical Conditions</label>
+                <div class="checkbox-group">
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="Diabetes"> Diabetes</label>
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="High BP"> High BP</label>
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="High Cholesterol"> Cholesterol</label>
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="Obesity"> Obesity</label>
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="Asthma"> Asthma</label>
+                    <label class="checkbox-item"><input type="checkbox" name="conditions" value="Joint Pain"> Joint Pain</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Food Restrictions (e.g. No Salt, No Sugar)</label>
+                <textarea name="restrictions" rows="3" placeholder="Enter ingredients to avoid..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Dietary Goals</label>
+                <input type="text" name="goals" placeholder="e.g. Weight Loss, Anti-inflammatory">
+            </div>
+
+            <button type="submit">Save My Health Profile</button>
+        </form>
+        {% if status %}
+            <div class="status">{{ status }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
